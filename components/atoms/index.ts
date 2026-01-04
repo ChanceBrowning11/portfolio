@@ -1,1 +1,4 @@
-export { PageHeader } from './typography'
+export { Badge, LanguageBadge } from './Badge'
+export { ExternalLink } from './links'
+export { HeatmapIcon, LanguageDot, ForkIcon, GitHubIcon, StarIcon } from './icons'
+export { CardHeader, PageHeader, SectionHeader, Title } from './typography'

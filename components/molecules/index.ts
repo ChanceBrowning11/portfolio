@@ -1,3 +1,7 @@
+export { Card } from './Card'
 export { DesktopNavigation } from './DesktopNavigation'
+export { HeatmapLegend } from './HeatmapLegend'
 export { MobileMenuButton } from './MobileMenuButton'
 export { MobileNavigation } from './MobileNavigation'
+export { ProgressBar } from './ProgressBar'
+export { StatCard } from './StatCard'

@@ -1,1 +1,5 @@
+export { CommitHeatmap } from './CommitHeatmap'
+export { LanguagesChart } from './LanguagesChart'
 export { NavigationHeader } from './NavigationHeader'
+export { QuickStats } from './QuickStats'
+export { RepositoryGrid } from './RepositoryCard'
