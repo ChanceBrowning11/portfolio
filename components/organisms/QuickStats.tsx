@@ -1,4 +1,5 @@
-import { Card } from "../molecules"
+import { CardHeader, CardTitle, BodyText } from '../atoms'
+import { Card } from '../molecules'
 
 export type QuickStatsProps = {
   languageStats: Record<string, number>
@@ -9,34 +10,32 @@ export type QuickStatsProps = {
 }
 
 export const QuickStats = ({ languageStats, topRepos }: QuickStatsProps) => (
-  <Card>  
-    <div className="mb-4 text-sm font-semibold text-gray-700 dark:text-gray-300">
-      Quick Stats
-    </div>
+  <Card>
+    <CardHeader>Quick Stats</CardHeader>
     <div className="grid grid-cols-2 gap-4">
       <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-        <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+        <CardTitle styles="text-3xl mb-1">
           {Object.values(languageStats).reduce((a, b) => a + b, 0)}
-        </div>
-        <div className="text-sm text-gray-600 dark:text-gray-400">Total Repositories</div>
+        </CardTitle>
+        <BodyText>Total Repositories</BodyText>
       </div>
       <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-        <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+        <CardTitle styles="text-xl mb-1">
           {Object.keys(languageStats).length}
-        </div>
-        <div className="text-sm text-gray-600 dark:text-gray-400">Languages Used</div>
+        </CardTitle>
+        <BodyText>Languages Used</BodyText>
       </div>
       <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-        <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+        <CardTitle styles="text-3xl mb-1">
           {topRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0)}
-        </div>
-        <div className="text-sm text-gray-600 dark:text-gray-400">Total Stars</div>
+        </CardTitle>
+        <BodyText>Total Stars</BodyText>
       </div>
       <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-        <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+        <CardTitle styles="text-3xl mb-1">
           {topRepos.reduce((sum, repo) => sum + repo.forks_count, 0)}
-        </div>
-        <div className="text-sm text-gray-600 dark:text-gray-400">Total Forks</div>
+        </CardTitle>
+        <BodyText>Total Forks</BodyText>
       </div>
     </div>
   </Card>

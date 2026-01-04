@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { GitHubRepo } from '@/utils/github'
-import { Badge, LanguageBadge, StarIcon, ForkIcon } from '@/components/atoms'
+import { Badge, LanguageBadge, StarIcon, ForkIcon, BodyText, SmallText, MutedText } from '@/components/atoms'
 
 interface RepositoryCardProps {
   repo: GitHubRepo
@@ -26,9 +26,9 @@ export function RepositoryCard({ repo, linkToProject = false }: RepositoryCardPr
       </div>
 
       {/* Description */}
-      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2 min-h-[40px]">
+      <BodyText styles="mb-4 line-clamp-2 min-h-[40px]">
         {repo.description || 'No description provided'}
-      </p>
+      </BodyText>
 
       {/* Topics */}
       {repo.topics && repo.topics.length > 0 && (
@@ -39,9 +39,9 @@ export function RepositoryCard({ repo, linkToProject = false }: RepositoryCardPr
             </Badge>
           ))}
           {repo.topics.length > 3 && (
-            <span className="px-2 py-1 text-xs text-gray-500 dark:text-gray-400">
+            <MutedText styles="px-2 py-1">
               +{repo.topics.length - 3} more
-            </span>
+            </MutedText>
           )}
         </div>
       )}
@@ -58,7 +58,7 @@ export function RepositoryCard({ repo, linkToProject = false }: RepositoryCardPr
             <span>{repo.forks_count}</span>
           </div>
         </div>
-        <span className="text-xs">Updated {formatDate(repo.updated_at)}</span>
+        <SmallText>Updated {formatDate(repo.updated_at)}</SmallText>
       </div>
     </div>
   )

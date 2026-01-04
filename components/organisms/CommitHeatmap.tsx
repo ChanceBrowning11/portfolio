@@ -1,7 +1,7 @@
 'use client'
 
 import { ContributionDay } from '@/utils/github'
-import { CardHeader, HeatmapIcon } from '../atoms'
+import { CardHeader, HeatmapIcon, SmallText } from '../atoms'
 import { Card, HeatmapLegend } from '../molecules'
 
 interface CommitHeatmapProps {
@@ -51,10 +51,10 @@ export function CommitHeatmap({ data, className = '' }: CommitHeatmapProps) {
         
         <div className="flex gap-1">
           {/* Day labels */}
-          <div className="flex flex-col gap-1 pr-2 text-xs text-gray-600 dark:text-gray-400">
+          <div className="flex flex-col gap-1 pr-2">
             {dayLabels.map((day, i) => (
               <div key={day} className="h-3 flex items-center" style={{ opacity: i % 2 === 0 ? 1 : 0 }}>
-                {day}
+                <SmallText>{day}</SmallText>
               </div>
             ))}
           </div>

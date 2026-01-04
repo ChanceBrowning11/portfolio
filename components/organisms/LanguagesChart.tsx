@@ -2,7 +2,7 @@
 
 import { LanguageStats } from '@/utils/github'
 import { getLanguageColor } from '@/utils/languages'
-import { CardHeader, LanguageDot } from '../atoms'
+import { CardHeader, LanguageDot, SmallText } from '../atoms'
 import { Card, ProgressBar } from '../molecules'
 
 interface LanguagesChartProps {
@@ -47,9 +47,9 @@ export function LanguagesChart({ stats, className = '' }: LanguagesChartProps) {
       {/* Pie chart legend (simplified) */}
       <div className="mt-6 flex flex-wrap gap-3">
         {sortedLanguages.map(([language]) => (
-          <div key={language} className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400">
+          <div key={language} className="flex items-center gap-2">
             <LanguageDot color={getLanguageColor(language)} size="sm" />
-            <span>{language}</span>
+            <SmallText>{language}</SmallText>
           </div>
         ))}
       </div>

@@ -1,4 +1,4 @@
-import { PageHeader, SectionHeader, ExternalLink, GitHubIcon } from '@/components/atoms'
+import { PageHeader, SectionHeader, ExternalLink, GitHubIcon, Lead } from '@/components/atoms'
 import { Card } from '@/components/molecules'
 import { CommitHeatmap, LanguagesChart, QuickStats } from '@/components/organisms'
 import { RepositoryGrid } from '@/components/templates'
@@ -18,12 +18,12 @@ export default async function Github() {
       {/* Header */}
       <div className="space-y-4">
         <PageHeader>GitHub Activity</PageHeader>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
+        <Lead>
           Explore my open source contributions and projects on{' '}
           <ExternalLink href={`https://github.com/${GITHUB_USERNAME}`}>
             @{GITHUB_USERNAME}
           </ExternalLink>
-        </p>
+        </Lead>
       </div>
 
       {/* Commit Heatmap Section */}
@@ -41,9 +41,9 @@ export default async function Github() {
       {/* Call to Action */}
       <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-8 text-center">
         <SectionHeader styles="mb-2">Want to collaborate?</SectionHeader>
-        <p className="text-gray-600 dark:text-gray-400 mb-6">
+        <Lead styles="mb-6">
           I'm always interested in working on exciting projects and contributing to open source.
-        </p>
+        </Lead>
         <a
           href={`https://github.com/${GITHUB_USERNAME}`}
           target="_blank"
