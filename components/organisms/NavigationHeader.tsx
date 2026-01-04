@@ -13,6 +13,7 @@ const navLinks: NavigationLink[] = [
   { href: '/', label: 'Home' },
   { href: '/project', label: 'Projects' },
   { href: '/resume', label: 'Resume' },
+  { href: '/github', label: 'GitHub' },
 ]
 
 export const NavigationHeader = ({ className }: NavigationHeaderProps) => {
