@@ -67,33 +67,79 @@ export async function fetchLanguageStats(username: string): Promise<LanguageStat
   return languageStats
 }
 
-/**
- * Fetch commit activity for the last year
- * Note: This uses a simplified approach. For more accurate data, 
- * you may need to use GitHub's GraphQL API or personal access token
- */
 export async function fetchCommitActivity(username: string): Promise<ContributionDay[]> {
-  // This is a placeholder that generates mock data
-  // For real data, you'll need to use GitHub GraphQL API with authentication
-  const days: ContributionDay[] = []
-  const today = new Date()
-  
-  for (let i = 365; i >= 0; i--) {
-    const date = new Date(today)
-    date.setDate(date.getDate() - i)
-    
-    // Mock data - replace with real API call
-    const count = Math.floor(Math.random() * 10)
-    const level = count === 0 ? 0 : count < 3 ? 1 : count < 5 ? 2 : count < 7 ? 3 : 4
-    
-    days.push({
-      date: date.toISOString().split('T')[0],
-      count,
-      level: level as 0 | 1 | 2 | 3 | 4,
+  const query = `
+    query($username: String!) {
+      user(login: $username) {
+        contributionsCollection {
+          contributionCalendar {
+            weeks {
+              contributionDays {
+                contributionCount
+                date
+              }
+            }
+          }
+        }
+      }
+    }
+  `
+
+  try {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    }
+
+    // Add authentication if token is available
+    if (process.env.GITHUB_TOKEN) {
+      headers['Authorization'] = `Bearer ${process.env.GITHUB_TOKEN}`
+    }
+
+    const response = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        query,
+        variables: { username },
+      }),
+      next: { revalidate: 3600 } // Cache for 1 hour
     })
+
+    if (!response.ok) {
+      throw new Error(`GitHub GraphQL API error: ${response.status}`)
+    }
+
+    const data = await response.json()
+
+    if (data.errors) {
+      console.error('GitHub GraphQL errors:', data.errors)
+      throw new Error('Failed to fetch contribution data')
+    }
+
+    const weeks = data.data?.user?.contributionsCollection?.contributionCalendar?.weeks || []
+    const days: ContributionDay[] = []
+
+    // Flatten weeks into individual days
+    weeks.forEach((week: any) => {
+      week.contributionDays.forEach((day: any) => {
+        const count = day.contributionCount
+        // Map contribution count to level (0-4)
+        const level = count === 0 ? 0 : count < 3 ? 1 : count < 6 ? 2 : count < 10 ? 3 : 4
+        
+        days.push({
+          date: day.date,
+          count,
+          level: level as 0 | 1 | 2 | 3 | 4,
+        })
+      })
+    })
+
+    return days
+  } catch (error) {
+    console.error('Error fetching commit activity:', error)
+    // Return empty array on error
+    return []
   }
-  
-  return days
 }
 
 /**
