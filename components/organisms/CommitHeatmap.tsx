@@ -18,7 +18,7 @@ export function CommitHeatmap({ data, className = '' }: CommitHeatmapProps) {
     currentWeek.push(day)
     const dayOfWeek = new Date(day.date).getDay()
     
-    if (dayOfWeek === 6 || index === data.length - 1) {
+    if (dayOfWeek === 5 || index === data.length - 1) {
       weeks.push([...currentWeek])
       currentWeek = []
     }
